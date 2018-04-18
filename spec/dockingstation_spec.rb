@@ -24,6 +24,11 @@ describe DockingStation do
   end
 
   it 'should raise an error if no bikes are free' do
-    expect { subject.release_bike }.to raise_error(Exception)
+    expect { subject.release_bike }.to raise_error('No bike is free')
+  end
+
+  it 'should raise an error if all docks are full' do
+    subject.dock_bike(bike)
+    expect { subject.dock_bike(bike) }.to raise_error('No dock is free')
   end
 end

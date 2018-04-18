@@ -9,12 +9,14 @@ class DockingStation
   end
 
   def release_bike
-    raise Exception if @bike_free == false
+    raise 'No bike is free' if @bike_free == false
     @bike_free = false
     Bike.new
   end
 
   def dock_bike(bike)
+    raise 'No dock is free' if @bike_free == true
+    @bike_free = true
     @dock << bike
     'Bike docked'
   end
