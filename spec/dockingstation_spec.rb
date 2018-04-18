@@ -3,10 +3,6 @@ require 'docking_station'
 describe DockingStation do
   it { should respond_to :release_bike }
 
-  it 'shows the empty dock' do
-    expect(subject.dock).to eq []
-  end
-
   let(:bike) { subject.release_bike }
   before { bike }
 
@@ -14,21 +10,16 @@ describe DockingStation do
     expect(bike).to be_working
   end
 
-  it 'docks bike' do
-    expect(subject.dock_bike(bike)).to eq 'Bike docked'
-  end
-
-  it 'shows the bike(s) docked' do
-    subject.dock_bike(bike)
-    expect(subject.dock).to include bike
+  it 'shows the bike is docked' do
+    expect(subject.dock_bike(bike)).to eq bike
   end
 
   it 'should raise an error if no bikes are free' do
-    expect { subject.release_bike }.to raise_error('No bike is free')
+    expect { 20.times { subject.release_bike } }.to raise_error('No bike is free')
   end
 
   it 'should raise an error if all docks are full' do
-    subject.dock_bike(bike)
-    expect { subject.dock_bike(bike) }.to raise_error('No dock is free')
+    expect { 20.times { subject.dock_bike(bike) } }.to raise_error('No dock is free')
   end
+
 end
