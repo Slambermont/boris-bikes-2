@@ -5,12 +5,12 @@ class DockingStation
 
   def initialize
     @dock = []
-    @bike_free = false
+    @bike_free = true
   end
 
   def release_bike
-    raise NoBikeError if @bike_free
-    @bike_free = true
+    raise Exception if @bike_free == false
+    @bike_free = false
     Bike.new
   end
 
