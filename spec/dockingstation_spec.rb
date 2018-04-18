@@ -12,4 +12,14 @@ describe DockingStation do
     bike = subject.dock_bike(Bike.new)
     expect(bike).to eq 'Bike docked'
   end
+
+  it 'shows the empty dock' do
+    expect(subject.dock).to eq []
+  end
+
+  it 'shows the bike(s) docked' do
+    subject.dock_bike(Bike.new)
+    expect(subject.dock.count).to eq 1
+  end
+
 end
